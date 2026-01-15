@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Focus Timer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⏱️ YouTube Focus Timer</h1>
+    </header>
+    
+    <section class="timer-section">
+      <div class="timer-card" id="homeFeedCard">
+        <div class="timer-header">
+          <span class="timer-icon">🏠</span>
+          <span class="timer-title">Home Feed</span>
+          <label class="toggle">
+            <input type="checkbox" id="homeFeedToggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="timer-display">
+          <span class="time-current" id="homeFeedTime">0:00</span>
+          <span class="time-separator">/</span>
+          <span class="time-limit" id="homeFeedLimit">5:00</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="homeFeedProgress"></div>
+        </div>
+        <div class="timer-status" id="homeFeedStatus">Active</div>
+      </div>
+      
+      <div class="timer-card" id="shortsCard">
+        <div class="timer-header">
+          <span class="timer-icon">📱</span>
+          <span class="timer-title">Shorts</span>
+          <label class="toggle">
+            <input type="checkbox" id="shortsToggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="timer-display">
+          <span class="time-current" id="shortsTime">0:00</span>
+          <span class="time-separator">/</span>
+          <span class="time-limit" id="shortsLimit">5:00</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="shortsProgress"></div>
+        </div>
+        <div class="timer-status" id="shortsStatus">Active</div>
+      </div>
+    </section>
+    
+    <section class="actions">
+      <button class="btn btn-reset" id="resetAll">
+        🔄 Reset All Timers
+      </button>
+      <button class="btn btn-settings" id="openSettings">
+        ⚙️ Settings
+      </button>
+    </section>
+    
+    <footer>
+      <p class="next-reset">Resets at midnight</p>
+    </footer>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

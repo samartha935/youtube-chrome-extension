@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Focus Timer - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⏱️ YouTube Focus Timer Settings</h1>
+      <p class="subtitle">Configure your time limits for YouTube</p>
+    </header>
+    
+    <main>
+      <section class="settings-group">
+        <h2>🏠 Home Feed</h2>
+        <div class="setting-row">
+          <label for="homeFeedEnabled">
+            <span class="setting-label">Enable Home Feed Timer</span>
+            <span class="setting-desc">Block home feed after time limit</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="homeFeedEnabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <label for="homeFeedLimit">
+            <span class="setting-label">Time Limit (minutes)</span>
+            <span class="setting-desc">Daily limit for home feed browsing</span>
+          </label>
+          <input type="number" id="homeFeedLimit" min="1" max="60" value="5" class="number-input">
+        </div>
+      </section>
+      
+      <section class="settings-group">
+        <h2>📱 Shorts</h2>
+        <div class="setting-row">
+          <label for="shortsEnabled">
+            <span class="setting-label">Enable Shorts Timer</span>
+            <span class="setting-desc">Block Shorts after time limit</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="shortsEnabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <label for="shortsLimit">
+            <span class="setting-label">Time Limit (minutes)</span>
+            <span class="setting-desc">Daily limit for Shorts viewing</span>
+          </label>
+          <input type="number" id="shortsLimit" min="1" max="60" value="5" class="number-input">
+        </div>
+      </section>
+      
+      <section class="settings-group">
+        <h2>🔄 Reset Options</h2>
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">Reset All Timers</span>
+            <span class="setting-desc">Clear all accumulated time</span>
+          </div>
+          <button class="btn btn-reset" id="resetAll">Reset Now</button>
+        </div>
+        <div class="info-box">
+          <p>⏰ Timers automatically reset every day at midnight.</p>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <div class="save-status" id="saveStatus"></div>
+      <p class="version">Version 1.0.0</p>
+    </footer>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>

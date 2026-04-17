@@ -14,7 +14,8 @@
     homeFeedEnabled: true,
     shortsEnabled: true,
     homeFeedBlocked: false,
-    shortsBlocked: false
+    shortsBlocked: false,
+    focusModeEnabled: false
   };
 
   let timerInterval = null;
@@ -63,6 +64,7 @@
       state = { ...state, ...data };
       state.homeFeedBlocked = state.homeFeedEnabled && state.homeFeedTime >= state.homeFeedLimit;
       state.shortsBlocked = state.shortsEnabled && state.shortsTime >= state.shortsLimit;
+      state.focusModeEnabled = data.focusModeEnabled || false;
     }
   }
 
@@ -159,14 +161,22 @@
   function applyBlocking() {
     if (!extensionValid) return;
     
-    // Check if home feed should be blocked
+    // Focus mode takes priority — immediately block home and shorts
+    if (state.focusModeEnabled) {
+      if (currentPage === 'home' || currentPage === 'shorts') {
+        window.location.href = '/feed/subscriptions';
+        return;
+      }
+    }
+    
+    // Check if home feed should be blocked (daily timer)
     if (state.homeFeedBlocked && currentPage === 'home') {
       // Redirect to subscriptions
       window.location.href = '/feed/subscriptions';
       return;
     }
     
-    // Check if shorts should be blocked
+    // Check if shorts should be blocked (daily timer)
     if (state.shortsBlocked && currentPage === 'shorts') {
       // Redirect to subscriptions
       window.location.href = '/feed/subscriptions';
@@ -183,7 +193,11 @@
     
     let css = '';
     
-    if (state.homeFeedBlocked) {
+    // When focus mode is on, hide both Home and Shorts nav
+    const hideHome = state.homeFeedBlocked || state.focusModeEnabled;
+    const hideShorts = state.shortsBlocked || state.focusModeEnabled;
+    
+    if (hideHome) {
       css += `
         /* Hide Home in sidebar */
         ytd-guide-entry-renderer:has(a[href="/"]),
@@ -195,7 +209,7 @@
       `;
     }
     
-    if (state.shortsBlocked) {
+    if (hideShorts) {
       css += `
         /* Hide Shorts in sidebar */
         ytd-guide-entry-renderer:has(a[href="/shorts"]),
@@ -239,6 +253,12 @@
         loadState().then(() => {
           applyBlocking();
         });
+        sendResponse({ success: true });
+      }
+      
+      if (message.action === 'focusModeChanged') {
+        state.focusModeEnabled = message.enabled;
+        applyBlocking();
         sendResponse({ success: true });
       }
     } catch (e) {

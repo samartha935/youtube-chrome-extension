@@ -1,10 +1,16 @@
 {
   "manifest_version": 3,
   "name": "YouTube Focus Timer",
-  "version": "1.0.0",
-  "description": "Automatically hides YouTube home feed and Shorts after a configurable time limit to help you stay focused.",
-  "permissions": ["storage", "activeTab"],
-  "host_permissions": ["*://*.youtube.com/*"],
+  "version": "1.1.0",
+  "description": "Automatically hides YouTube home feed and Shorts after a configurable time limit to help you stay focused. Includes Focus Mode to block distracting sites.",
+  "permissions": ["storage", "activeTab", "alarms"],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.x.com/*",
+    "*://x.com/*",
+    "*://*.twitter.com/*",
+    "*://twitter.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -14,6 +20,17 @@
       "js": ["content.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.x.com/*",
+        "*://x.com/*",
+        "*://*.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "js": ["focus_block.js"],
+      "css": ["focus_block.css"],
+      "run_at": "document_start"
     }
   ],
   "action": {

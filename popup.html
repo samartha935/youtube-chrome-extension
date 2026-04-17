@@ -12,6 +12,81 @@
       <h1>⏱️ YouTube Focus Timer</h1>
     </header>
     
+    <!-- Focus Mode Section -->
+    <section class="focus-section" id="focusSection">
+      <div class="focus-card" id="focusCard">
+        <div class="focus-header">
+          <span class="focus-icon">🎯</span>
+          <span class="focus-title">Focus Mode</span>
+          <span class="focus-badge" id="focusBadge">OFF</span>
+        </div>
+        
+        <!-- Inactive state: show activation controls -->
+        <div class="focus-activate" id="focusActivate">
+          <p class="focus-desc">Block YouTube Home, Shorts &amp; X.com</p>
+          <div class="focus-timer-input">
+            <label for="focusDuration">Duration (minutes):</label>
+            <input type="number" id="focusDuration" min="0" max="480" value="30" placeholder="0 = no limit" class="focus-duration-input">
+            <span class="focus-hint">0 = unlimited</span>
+          </div>
+          <button class="btn btn-focus-start" id="focusStartBtn">
+            🚀 Enter Focus Mode
+          </button>
+        </div>
+        
+        <!-- Active state: show status and stop button -->
+        <div class="focus-active" id="focusActive" style="display: none;">
+          <div class="focus-countdown" id="focusCountdown">Active — no timer set</div>
+          <div class="focus-blocked-sites">
+            <span class="blocked-tag">🏠 Home</span>
+            <span class="blocked-tag">📱 Shorts</span>
+            <span class="blocked-tag">𝕏 X.com</span>
+          </div>
+          <button class="btn btn-focus-stop" id="focusStopBtn">
+            ⛔ End Focus Mode
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friction Modal (Option C: wait + shame sentence) -->
+    <div class="friction-overlay" id="frictionOverlay" style="display: none;">
+      <div class="friction-modal">
+        <!-- Phase 1: Waiting Room -->
+        <div class="friction-phase" id="frictionPhase1">
+          <div class="friction-icon">⏳</div>
+          <h2 class="friction-title">Are you sure?</h2>
+          <p class="friction-message">Focus mode is protecting your time.<br>You must wait before you can disable it.</p>
+          <div class="friction-timer" id="frictionTimer">30</div>
+          <p class="friction-timer-label">seconds remaining</p>
+          <button class="btn btn-friction-cancel" id="frictionCancel1">← Stay Focused</button>
+        </div>
+
+        <!-- Phase 2: Shame Sentence -->
+        <div class="friction-phase" id="frictionPhase2" style="display: none;">
+          <div class="friction-icon">✍️</div>
+          <h2 class="friction-title">Type to confirm</h2>
+          <p class="friction-message">To disable Focus Mode, type the following sentence exactly:</p>
+          <div class="friction-sentence">
+            "I am choosing distraction over my goals right now."
+          </div>
+          <input 
+            type="text" 
+            class="friction-input" 
+            id="frictionInput" 
+            placeholder="Type the sentence above..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <div class="friction-match" id="frictionMatch"></div>
+          <div class="friction-buttons">
+            <button class="btn btn-friction-cancel" id="frictionCancel2">← Stay Focused</button>
+            <button class="btn btn-friction-confirm" id="frictionConfirm" disabled>Disable Anyway</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <section class="timer-section">
       <div class="timer-card" id="homeFeedCard">
         <div class="timer-header">
